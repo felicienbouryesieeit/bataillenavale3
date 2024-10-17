@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+#Définition de toute les variables globales
 isennemi=False
 numberofslot=100
 numberofbarriereslot=0
@@ -24,6 +25,19 @@ numberofplayervalidshot=0
 numberofennemivalidshot=0
 
 
+slotdistance=30
+beginlocationx=0
+beginlocationy=0
+currentplayerlocationx=0
+currentplayerlocationy=0
+haveplayermoved=False
+
+rectanglewidth=(25+(slotdistance*(5-1)))
+rectangleheight=25
+currentplayershipscale=0
+shipbasescale=5 
+
+#Définition des arrays
 playership=[]
 ennemiship=[]
 slots = []
@@ -35,20 +49,19 @@ ennemivalidshot=[]
 
 
 
+
+
 #initialisez la fenetre du jeu
 pygame.init()
 
 #detailler la taille de la fenetre du jeu
-slotdistance=30
-beginlocationx=0
-beginlocationy=0
-currentplayerlocationx=0
-currentplayerlocationy=0
-haveplayermoved=False
+
 
 taille_fenetre = (800, 600)
 
-blanc = (0, 100,100)
+#definition des couleurs couleurs
+
+couleurfond = (0, 100,100)
 red = (255,0,0)
 bleu=(0,255,255)
 yellow=(255,255,0)
@@ -61,18 +74,14 @@ green=(0,255,0)
 col=blue2
 col2=blue2
 
+#définition des limites du terrain (lorsque le joueur se déplace)
+
 uplimit=(1*slotdistance)+basedecalage
 leftlimit=(2*slotdistance)+basedecalage
 downlimit=(10*slotdistance)+basedecalage
 rightlimit=(11*slotdistance)+basedecalage
 
 fenetre = pygame.display.set_mode(taille_fenetre)
-#slotimage = pygame.image.load('slot.png')
-#slotimage.convert()
-rectanglewidth=(25+(slotdistance*(5-1)))
-rectangleheight=25
-currentplayershipscale=0
-shipbasescale=5
 
 
 
@@ -90,15 +99,14 @@ shipbasescale=5
 
 
 
-
+#variables globale  pour afficher le texte de fin
 
 font = pygame.font.Font(None, 36)
-text = font.render("Hello, Pygame!", True, white)
+text = font.render("", True, white)
 victoiretexte=""
 
 text_rect = text.get_rect()
 
-# Placer le texte au centre de la fenêtre
 text_rect.center = (350, 100)
 
 
@@ -124,7 +132,7 @@ text_rect.center = (350, 100)
 
 
 
-
+#change la taille du bateau avant de le poser (afin de faire un bateau de chaque type: porte avion, torpilleur, ect)
 def changeplayershipsize(b):
     global currentplayershipscale
     global ennemilife
@@ -141,7 +149,7 @@ def beginplaceshipglobal():
 
 beginplaceshipglobal()
 
-
+#definition de "rect 1" (le personnage que l'on controle)
 rectanglewidth2=(25+(slotdistance*(currentplayershipscale-1)))
 rectangleheight2=25
 
@@ -149,23 +157,19 @@ rect1=pygame.Rect(0,0,rectanglewidth,rectangleheight)
 
 
 
-
+#placer un bateau lorsque c'est au joueur 2 de jouer
 def beginplaceshipennemi():
     global playershipetape
     global topleft3
     global rect1
     global isennemi
     isennemi=True
-    print("wejdene")
     playershipetape=0
     beginplaceshipglobal()
     rect1.topleft=topleft3
-    
-    #rotateship2()
-    
-    #rotateship2()
     spawnrect1()
 
+#code qui lance le 1er tour du joueur 1, après que tout les bateaux aient été placés
 def firstplayerturn():
     global currentplayershipscale
     global topleft3
@@ -180,7 +184,7 @@ def firstplayerturn():
 
 
 
-
+#au début du jeu, changer le type de bateau à chaque fois qu'un bateau est placé
 def changeplayership():
     global playershipetape
     global currentplayershipscale
@@ -205,14 +209,12 @@ def changeplayership2(a,b):
     global ennemilife
     global playerlife
 
-    print("pitie",playershipetape==a)
     if playershipetape==a:
         changeplayershipsize(b)
 
-    print("gaga",currentplayershipscale)
 
 
-
+#permet de changer la taille du bateau lorsqu'on le fait "tourner"
 def setplayersize():
     global rectanglewidth2
     global rectangleheight2
@@ -220,6 +222,7 @@ def setplayersize():
     rectanglewidth2=(25+(slotdistance*(currentplayershipscale-1)))
     rectangleheight2=25
 
+#permet de changer la taille du joueur
 def spawnrect1():
     global rect1
     global rectanglewidth
@@ -234,19 +237,10 @@ def spawnrect1():
 
 
 
-def setrect1scale():
-    global rectanglewidth
-    global rectangleheight
-    global currentplayershipscale
-    
-    #rectanglewidth=(25+(slotdistance*(currentplayershipscale-1)))
-    #rectangleheight=25
-    #spawnrect1()
-
-setrect1scale()
 
 
 
+#permet de bouger le joueur
 def resetmoveplayer():
     global haveplayermoved
     if haveplayermoved==True:
@@ -271,14 +265,7 @@ def moveplayer(directionx,directiony):
         
         
         
-        """
-        
 
-        
-        
-        
-        """
-        #print("rectangley: ",rect1.y,"uplimit:",uplimit)
             
 
         if topleft3==0:
@@ -306,7 +293,7 @@ def moveplayer2(x,y):
     if rect1.x>rightlimit:
         rect1.x=rightlimit
 
-
+#permet de faire tourner le bateau
 def rotateship2():
     global isvertical
     if isvertical==False:
@@ -321,9 +308,8 @@ def rotateship():
     global rect1
     global isvertical
     
-    #rectangleheight3=rectangleheight
-    #rectanglewidth3=rectanglewidth
-    print("vol")
+    
+    
     setplayersize()
     if (isvertical==True) :
             rectangleheight=rectanglewidth2
@@ -334,11 +320,10 @@ def rotateship():
     spawnrect1()
             
     
-    #moveplayer2(0,0)
 rotateship()
 
 
-
+#permet de faire apparaitre le terrain (les cases et les murs)
 def spawnslots():
     count = 0
     global numberofslot
@@ -355,7 +340,6 @@ def spawnslots():
     barriereslot=[]
     locationx=0
     locationy=0
-    #distance=30
     isbarriere=False
     numberofslot=0
     numberofbarriereslot=0
@@ -398,30 +382,19 @@ def spawnslots():
             beginlocationy=nouveau_rectangle.y
 
 
-        #numberofbarriereslot=numberofslot2-numberofslot
+
         
 
         count+=1
         
-    """
-        isbarriere=False
+def onwin(playerwin):
+    global victoiretexte
+    if playerwin:
+        victoiretexte="player 1 win"
+    else:
         
-        
-        if locationx==0 or locationx==10 or locationy==0 or locationy==10:
-            isbarriere=True
-        
-        
+        victoiretexte="player 2 win"
 
-        #if isbarriere==False:
-        slots.append(nouveau_rectangle)
-        #else:
-        #barriereslot.append(nouveau_rectangle)
-            #numberofslot2+=1
-
-       
-        """
-
-    #numberofbarriereslot=numberofslot2-numberofslot
 
 def endspawnrectangle(nouveau_rectangle):
     nouveau_rectangle.topleft=rect1.topleft
@@ -434,13 +407,7 @@ def endspawnrectangle(nouveau_rectangle):
             changeplayership()
     rotateship()
 
-def onwin(playerwin):
-    global victoiretexte
-    if playerwin:
-        victoiretexte="player 1 win"
-    else:
-        
-        victoiretexte="player 2 win"
+#permet de faire apparaitre des choses (des vaisseaux ou des tirs) lorsque l'on appuie sur espace
         
 def spawnplayership():
     global playershot
@@ -523,7 +490,7 @@ def spawnplayership():
 
 
 
-
+#permet de faire une action en appuyant sur "espace "
 def beginspace():
     global ispressingspace
     global currentplayershipscale
@@ -531,16 +498,13 @@ def beginspace():
         ispressingspace=True
         print("miaou")
         spawnplayership()
-        #currentplayershipscale=2
-        setrect1scale()
-
 
 def resetspace():
     global ispressingspace
     if ispressingspace==True:
         ispressingspace=False
 
-
+#permet de faire une action en appuyant sur "R"
 def beginrotate():
     global ispressingrotate
     if ispressingrotate==False:
@@ -557,7 +521,7 @@ def resetrotate():
 
 
 
-
+#permet d'afficher le terrain
 def showslots():
     count = 0
     global slots
@@ -580,7 +544,7 @@ def showslots():
             col=red
         
         count+=1
-
+#permet d'afficher les objets créés par les joueurs
 def showplayerships():
     global playership
     global ennemiship
@@ -600,22 +564,22 @@ def showplayerships():
     global col2
 
     count=0
-    #if (isennemi==False):
+    
     while count < numberofplayership:
-        #print("bateau")
+        
             if isingame==False and isennemi==False:
                 pygame.draw.rect(fenetre,white,playership[count])
-            if rect1.colliderect(playership[count]) :#and not isingame:
+            if rect1.colliderect(playership[count]) :
                 if isingame==True or isennemi==False:
                     col=red
             count+=1
-    #else:
+    
     count=0
     while (count<numberofennemiship) :
         if isingame==False and isennemi==True:
             pygame.draw.rect(fenetre,black,ennemiship[count])
         if rect1.colliderect(ennemiship[count]) :
-            if isingame==True or isennemi==True:#and not isingame:
+            if isingame==True or isennemi==True:
                 col=red
         
         count+=1
@@ -626,7 +590,7 @@ def showplayerships():
                 pygame.draw.rect(fenetre,rose,playershot[count])
                 
             if rect1.colliderect(playershot[count]) and isingame and isennemi==False:
-                #col=red
+                
                 col2=red
             
             count+=1
@@ -636,7 +600,7 @@ def showplayerships():
             if isennemi==True :
                 pygame.draw.rect(fenetre,green,ennemishot[count])
             if rect1.colliderect(ennemishot[count]) and isingame and isennemi==True:
-                #col=red
+                
                 col2=red
             
             count+=1
@@ -661,13 +625,10 @@ def showplayerships():
             count+=1
 
 
-def switchplayer():
-    global isennemi
-    if isennemi==True:
-        isennemi=False
-    else:
-        isennemi=True
 
+
+
+#fonction générale d'affichage
 def show():
     
     global rect1
@@ -688,6 +649,13 @@ def show():
     pygame.draw.rect(fenetre,col3,rect1)
 
 
+#Permet d'alterner entre le joueur 1 et le joueur 2
+def switchplayer():
+    global isennemi
+    if isennemi==True:
+        isennemi=False
+    else:
+        isennemi=True
 
 
 
@@ -742,44 +710,34 @@ def show():
 
 
 
-gogo=0
 
 
-#detailler la taille de la fenetre du jeu
 
+
+#crée le terrain
 spawnslots()
-#rect2=pygame.Rect(0,0,25,25)
-
-#variable qui definit la couleur de fond du jeu
 
 
-#rect[]
-#rect2.center=600,110
 
-
-#boucle qui se joue plusieurs fois par seconde
+#place le joueur sur la première case
 moveplayer2(beginlocationx,beginlocationy)
 currentplayerlocationx=beginlocationx
 currentplayerlocationx=beginlocationy
-random_number = 0
+
+#boucle qui se joue plusieurs fois par seconde
 while True:
     for event in pygame.event.get():
-        #random_number = random.randint(0, 255)
         
-        #blanc = (random.randint(0, 255), random.randint(0, 255),random.randint(0, 255))
-        
+        #permet au jeu de ne pas se quitter tout seul
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
 
-#appliquer la couleur de fond du jeu
-    
+    #remplis l'arrière plan du jeu d'une couleur choisie
+    fenetre.fill(couleurfond)
 
-    fenetre.fill(blanc)
-    #rect1.center=gogo,200
-    #gogo+=0.1
-    #print("player life: ",playerlife," ennemilife ",ennemilife)
+    #permet d'utiliser les différentes touches du jeu
     if pygame.key.get_pressed()[pygame.K_SPACE] :
         
         beginspace()
@@ -829,19 +787,17 @@ while True:
 
     if not pygame.key.get_pressed()[pygame.K_DOWN] and  not pygame.key.get_pressed()[pygame.K_UP] and not pygame.key.get_pressed()[pygame.K_LEFT] and not pygame.key.get_pressed()[pygame.K_RIGHT]:
         resetmoveplayer()
-        #gogo+=0.1
 
-    #
-    
-    
-    
+
+
+    #permet d'afficher les différents éléments du jeu à chaque frame
     show()
-    #
-    #fenetre.blit(slotimage,[10,10])
 
-    
+    #permet d'afficher le texte de fin
     text = font.render(victoiretexte, True, white)
     
     fenetre.blit(text, text_rect)
 
+
+    #permet d'afficher la fenêtre
     pygame.display.flip()
