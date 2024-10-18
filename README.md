@@ -2,10 +2,10 @@
 
 Installation:
 
--Installer le répertoire
--Installer visual studio code
--Installer pygame sur visual studio code
--Lancer le fichier "bataillenavalemain.py" sur visual studio code
+\-Installer le répertoire
+\-Installer visual studio code
+\-Installer pygame sur visual studio code
+\-Lancer le fichier "bataillenavalemain.py" sur visual studio code
 
 Règles de la bataille navale en général
 
