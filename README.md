@@ -1,12 +1,12 @@
 # bataillenavale3
 
-Installation:
-
-\-Installer le répertoire
-\-Installer visual studio code
-\-Installer pygame sur visual studio code
-\-Lancer le fichier "bataillenavalemain.py" sur visual studio code
-
+Installation:<br />
+<br />
+  -Installer le répertoire<br />
+  -Installer visual studio code<br />
+  -Installer pygame sur visual studio code<br />
+  -Lancer le fichier "bataillenavalemain.py" sur visual studio code<br />
+<br />
 Règles de la bataille navale en général
 
 -Le jeu est composé d'une grille de 10 cases sur 10 cases
