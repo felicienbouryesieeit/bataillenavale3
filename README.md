@@ -22,10 +22,10 @@ Règles de la bataille navale en général
 
 Règles de ce jeu en particulier
 
-Le jeu se joue en utilisant les touches du clavier :
--Les flèches directionnelles pour se déplacer
--"R" pour tourner le bateau
--"Space" pour placer le bateau ou pour détruire une case adverse
+-Le jeu se joue en utilisant les touches du clavier :
+  -Les flèches directionnelles pour se déplacer
+  -"R" pour tourner le bateau
+  -"Space" pour placer le bateau ou pour détruire une case adverse
 
 -Le premier joueur commence par placer tout ses bateaux, une fois qu'il a terminé, c'est au tour du deuxième joueur de placer les siens
 -Après que le  deuxième joueur ai placé tout ses bateaux, le tour du premier joueur commence
